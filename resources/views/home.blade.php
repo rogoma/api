@@ -19,5 +19,28 @@
             </div>
         </div>
     </div>
+    <br><br>
+    CONSUMIMOS DATOS DE API-REST
+    {{-- CÓDIGO EJEMPLO PARA CONSUMIR API-REST --}}
+        @foreach ($usuariosArray as $usuario)
+        <div>
+            <ul class="list-group mt-2 mb-4">
+                <li class="list-group-item active">USUARIO: {{$usuario['name']}}</li>
+                <li class="list-group-item">MAIL: {{$usuario['email']}}</li>
+                <li class="list-group-item">DIRECCIÓN: {{$usuario['address']['street']}}</li>
+
+                {{-- //<td>{{ is_null($usuario['address']['street']->first()) ? '' : number_format($orders[$i]->simese->last()['simese'],'0', ',','.') }}</td> --}}
+
+                @if ($usuario['address']['zipcode'] == '92998-3874')
+                    CODIGO 92998-3874
+                @else
+                    OTRO CODIGO
+                @endif
+
+                <li class="list-group-item">CÓDZIP: {{$usuario['address']['zipcode']}}</li>
+                <li class="list-group-item">TELÉFONO: {{$usuario['phone']}}</li>
+                <li class="list-group-item">WEB: {{$usuario['website']}}</li>
+        </div>
+        @endforeach
 </div>
 @endsection
