@@ -22,16 +22,17 @@ class GuardarpacienteRequest extends FormRequest
      * @return array
      */
     public function rules()
-    {
-        return [
-            "ci" => "required|unique:pacientes, ci",
-            "nombres" => "required",
-		    "apellidos" => "required",
-		    "direccion" => "required",
-            "edad" => "required",
-		    "sexo" => "required",
-		    "tipo_sangre" => "required",
-		    "email" => "required"
-        ];
-    }
+{
+    return [
+        "ci" => "required|unique:pacientes,ci",
+        "nombres" => "required",
+        "apellidos" => "required",
+        "direccion" => "required",
+        "edad" => "required",
+        "sexo" => "required",
+        "tipo_sangre" => "required",
+        "email" => "required|email"
+    ];
+}
+
 }
