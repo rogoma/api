@@ -42,5 +42,14 @@
                 <li class="list-group-item">WEB: {{$usuario['website']}}</li>
         </div>
         @endforeach
+
+        {{-- CONSUMIMOS DATOS DE BD-MYSQL
+        @foreach ($usuariosArray2 as $usuario2)
+        <div>
+            <ul class="list-group mt-2 mb-4">
+                <li class="list-group-item active">NRO CUENTA: {{$usuario2->'nro_cuenta'}}</li>
+                <li class="list-group-item active">NRO CUENTA: {{$usuario2->'nom_cuenta'}}</li>
+        </div>
+        @endforeach --}}
 </div>
 @endsection

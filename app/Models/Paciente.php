@@ -9,14 +9,17 @@ class Paciente extends Model
 {
     use HasFactory;
 
+    //UTILIZA CONEXIÓN A BD POSTGRESQL (LOCALHOST)
+    protected $connection = 'pgsql';
+
     protected $fillable = [
         'ci',
         'nombres',
 		'apellidos',
 		'direccion' ,
         'edad',
-		'sexo',				
-		'tipo_sangre',				
+		'sexo',
+		'tipo_sangre',
 		'email'
     ];
 

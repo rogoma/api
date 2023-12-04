@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use App\Models\Senasa\PlanCuentas;
 
 class HomeController extends Controller
 {
@@ -30,6 +31,7 @@ class HomeController extends Controller
         $usuarios = Http::get('https://jsonplaceholder.typicode.com/users');
         $usuariosArray = $usuarios->json();
 
+        // $usuariosArray2 = PlanCuentas::all();
         return view('home', compact('usuariosArray'));
     }
 }
