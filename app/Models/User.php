@@ -12,6 +12,9 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    //UTILIZA CONEXIÓN A BD POSTGRESQL (LOCALHOST)
+    protected $connection = 'pgsql';
+
     /**
      * The attributes that are mass assignable.
      *
