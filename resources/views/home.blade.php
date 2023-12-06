@@ -20,7 +20,7 @@
         </div>
     </div>
     <br><br>
-    CONSUMIMOS DATOS DE API-REST
+    CONSUMIMOS DATOS DE API-REST: https://jsonplaceholder.typicode.com/users
     {{-- CÓDIGO EJEMPLO PARA CONSUMIR API-REST --}}
         @foreach ($usuariosArray as $usuario)
         <div>

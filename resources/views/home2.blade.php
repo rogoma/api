@@ -20,7 +20,7 @@
         </div>
     </div>
     <br><br>
-    CONSUMIMOS DATOS DE BD-MYSQL: senasa
+    CONSUMIMOS DATOS DE BD-MYSQL: localhost:3306:senasa
     {{-- CÓDIGO EJEMPLO PARA CONSUMIR API-REST --}}
         @foreach ($planes as $plan)
         <div>
