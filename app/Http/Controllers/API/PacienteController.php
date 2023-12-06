@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ActualizarPacienteRequest;
 use App\Http\Requests\GuardarPacienteRequest;
-
 use App\Models\Paciente;
 use Illuminate\Http\Request;
 
@@ -31,8 +31,8 @@ class PacienteController extends Controller
         Paciente::create($request->all());
         return response()->json([
             'res' => true,
-            'msg' => 'Paciente Guardado Correctamente'
-        ]);
+            'mensaje' => 'Paciente Guardado Correctamente'
+        ],200);
     }
 
     /**
@@ -41,9 +41,12 @@ class PacienteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Paciente $paciente)
     {
-        //
+        return response()->json([
+            'res' => true,
+            'mensaje' => 'Paciente Actualizado Correctamente'
+        ],200);
     }
 
     /**
@@ -53,9 +56,13 @@ class PacienteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ActualizarPacienteRequest $request, Paciente $paciente)
     {
-        //
+        $paciente->update($request->all());
+        return response()->json([
+            'res' => true,
+            'paciente' => $paciente
+        ],200);
     }
 
     /**
