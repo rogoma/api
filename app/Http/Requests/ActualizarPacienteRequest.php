@@ -24,7 +24,7 @@ class ActualizarPacienteRequest extends FormRequest
     public function rules()
     {
         return [
-            // "ci" => "required|unique:pacientes,ci",
+            "ci" => "required|unique:pacientes,ci,".$this->route('paciente')->id,
             "nombres" => "required",
             "apellidos" => "required",
             "direccion" => "required",

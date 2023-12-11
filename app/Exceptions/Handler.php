@@ -52,7 +52,7 @@ class Handler extends ExceptionHandler
     public function render ($request, Throwable $exception)
     {
         if($exception instanceof ModelNotFoundException){
-            return response()->json(['res'=>false,"error" => "Error dato de paciente no encontrado"],400);
+            return response()->json(['res'=>false,"error" => "Error, dato de paciente no encontrado"],400);
         }
         return parent::render($request, $exception);
     }
