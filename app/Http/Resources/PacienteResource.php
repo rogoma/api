@@ -19,6 +19,7 @@ class PacienteResource extends JsonResource
         return [
             'id' => $this->id,
             'nombres' => Str::of($this->nombres)->upper(),
+            'apellidos' => Str::of($this->apellidos)->upper(),
             'created_at' => $this->created_at->format('d-m-Y')
         ];
     }
