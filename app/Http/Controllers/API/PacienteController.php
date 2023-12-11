@@ -37,8 +37,9 @@ class PacienteController extends Controller
         //     'mensaje' => 'Paciente Guardado Correctamente'
         // ],200);
 
-        //con Resources
-        return new PacienteResource(Paciente::create($request->all()));
+        //con Resources y mensajes
+        return (new PacienteResource(Paciente::create($request->all())))
+                    ->additional(['msg' => 'Paciente Guardado Correctamente']);
     }
 
     /**
@@ -54,8 +55,9 @@ class PacienteController extends Controller
         //     'mensaje' => 'Paciente Actualizado Correctamente'
         // ],200);
 
-        //con Resources
-        return new PacienteResource($paciente);
+        //con Resources y mensajes
+        return (new PacienteResource($paciente))
+                    ->additional(['msg' => 'Paciente Actualizado Correctamente']);
     }
 
     /**
@@ -75,10 +77,14 @@ class PacienteController extends Controller
         //     'paciente' => $paciente
         // ],200);
 
-         //con Resources
+         //con Resources y mensajes y StatusCode
          $paciente->update($request->all());
-         return new PacienteResource($paciente);
+         return (new PacienteResource($paciente))
+                    ->additional(['msg' => 'Paciente Actualizado Correctamente'])
+                    ->response()
+                    ->setStatusCode(202);
     }
+    
 
     /**
      * Remove the specified resource from storage.
@@ -96,6 +102,7 @@ class PacienteController extends Controller
 
         //con Resources
         $paciente->delete();
-        return new PacienteResource($paciente);
-    }
+        return (new PacienteResource($paciente))
+                    ->additional(['msg' => 'Paciente Eliminado Correctamente']);
+    }    
 }

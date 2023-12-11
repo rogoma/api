@@ -22,4 +22,11 @@ class PacienteResource extends JsonResource
             'created_at' => $this->created_at->format('d-m-Y')
         ];
     }
+
+    public function with($request)
+    {
+        return [
+            'res' => true,
+        ];
+    }
 }
