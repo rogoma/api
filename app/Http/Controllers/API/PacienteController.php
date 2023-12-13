@@ -19,8 +19,13 @@ class PacienteController extends Controller
     public function index()
     {
         // return Paciente::all();
-        //con Resources
-        return PacienteResource::collection(Paciente::all());
+
+        //con Resources para POSTMAN
+        // return PacienteResource::collection(Paciente::all());
+
+        //PARA CONSUMIR DESDE VISTA (INDEX.HTML)
+        $pacientes = Paciente::all();
+        return $pacientes;
     }
 
     /**

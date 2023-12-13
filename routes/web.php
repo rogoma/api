@@ -15,6 +15,10 @@ use App\Http\Controllers\PlanCuentasController;
 |
 */
 
+Route::get('/pacientes', function () {
+    return view('index');
+});
+
 Route::get('/', function () {
     return view('welcome');
 });
