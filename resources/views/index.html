@@ -5,27 +5,27 @@
   <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
-  
-   
+
+
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.css">
   <style>
   #app{
-      background-color:#CFD8DC;      
+      background-color:#CFD8DC;
   }
   </style>
 </head>
 <body>
   <div id="app">
     <v-app>
-      <v-main>   
+      <v-main>
        <!--<h2 class="text-center">CRUD usando APIREST con Node JS</h2>-->
-       <!-- Botón CREAR -->  
+       <!-- Botón CREAR -->
        <v-flex class="text-center align-center">
-       <v-btn class="mx-2 mt-4"  fab dark color="#00B0FF" @click="formNuevo()"><v-icon dark>mdi-plus</v-icon></v-btn>           
-       </v-flex>              
-         
-        <v-card class="mx-auto mt-5" color="transparent" max-width="1280" elevation="8">                    
-      
+       <v-btn class="mx-2 mt-4"  fab dark color="#00B0FF" @click="formNuevo()"><v-icon dark>mdi-plus</v-icon></v-btn>
+       </v-flex>
+
+        <v-card class="mx-auto mt-5" color="transparent" max-width="1280" elevation="8">
+
         <!-- Tabla y formulario -->
         <v-simple-table class="mt-5">
             <template v-slot:default>
@@ -52,13 +52,13 @@
                 </tbody>
             </template>
         </v-simple-table>
-        </v-card>        
+        </v-card>
       <!-- Componente de Diálogo para CREAR y EDITAR -->
-      <v-dialog v-model="dialog" max-width="500">        
+      <v-dialog v-model="dialog" max-width="500">
         <v-card>
-          <v-card-title class="blue darken-2 white--text">Paciente</v-card-title>    
-          <v-card-text>            
-            <v-form>             
+          <v-card-title class="blue darken-2 white--text">Paciente</v-card-title>
+          <v-card-text>
+            <v-form>
               <v-container>
                 <v-row>
                   <input v-model="paciente.id" hidden></input>
@@ -72,7 +72,7 @@
                     <v-text-field v-model="paciente.apellidos" label="Apellidos" type="text" solo required></v-text-field>
                   </v-col>
                 </v-row>
-              </v-container>            
+              </v-container>
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
@@ -99,96 +99,96 @@
       el: '#app',
       vuetify: new Vuetify(),
        data() {
-        return {            
+        return {
             pacientes: [],
             dialog: false,
-            operacion: '',            
+            operacion: '',
             paciente:{
                 id: null,
                 ci:'',
                 nombres:'',
                 apellidos:''
-            }          
+            }
         }
        },
-       created(){               
+       created(){
             this.mostrar()
-       },  
-       methods:{          
+       },
+       methods:{
             //MÉTODOS PARA EL CRUD
             mostrar:function(){
               axios.get(url)
               .then(response =>{
-                this.pacientes = response.data;                   
+                this.pacientes = response.data;
               })
             },
             crear:function(){
-                let parametros = {ci:this.paciente.ci, nombres:this.paciente.nombres,apellidos:this.paciente.apellidos };                
+                let parametros = {ci:this.paciente.ci, nombres:this.paciente.nombres,apellidos:this.paciente.apellidos};
                 axios.post(url, parametros)
                 .then(response =>{
                   this.mostrar();
-                });     
+                });
                 this.paciente.ci="";
                 this.paciente.nombres="";
                 this.paciente.apellidos="";
-            },                        
+            },
             editar: function(){
-            let parametros = {ci:this.paciente.ci, nombres:this.paciente.nombres, apellidos:this.paciente.apellidos, id:this.paciente.id};                            
-            //console.log(parametros);                   
-                 axios.put(url+this.paciente.id, parametros)                            
-                  .then(response => {                                
+            let parametros = {ci:this.paciente.ci, nombres:this.paciente.nombres, apellidos:this.paciente.apellidos, id:this.paciente.id};
+            //console.log(parametros);
+                 axios.put(url+this.paciente.id, parametros)
+                  .then(response => {
                      this.mostrar();
-                  })                
+                  })
                   .catch(error => {
-                      console.log(error);            
+                      console.log(error);
                   });
             },
             borrar:function(id){
              Swal.fire({
-                title: '¿Confirma eliminar el registro?',   
-                confirmButtonText: `Confirmar`,                  
-                showCancelButton: true,                          
-              }).then((result) => {                
-                if (result.isConfirmed) {      
+                title: '¿Confirma eliminar el registro?',
+                confirmButtonText: `Confirmar`,
+                showCancelButton: true,
+              }).then((result) => {
+                if (result.isConfirmed) {
                       //procedimiento borrar
                       axios.delete(url+id)
-                      .then(response =>{           
+                      .then(response =>{
                           this.mostrar();
-                       });      
+                       });
                       Swal.fire('¡Eliminado!', '', 'success')
-                } else if (result.isDenied) {                  
+                } else if (result.isDenied) {
                 }
-              });              
+              });
             },
 
             //Botones y formularios
             guardar:function(){
               if(this.operacion=='crear'){
-                this.crear();                
+                this.crear();
               }
-              if(this.operacion=='editar'){ 
-                this.editar();                           
+              if(this.operacion=='editar'){
+                this.editar();
               }
-              this.dialog=false;                        
-            }, 
+              this.dialog=false;
+            },
             formNuevo:function () {
               this.dialog=true;
               this.operacion='crear';
-              this.paciente.ci='';                           
+              this.paciente.ci='';
               this.paciente.nombres='';
               this.paciente.apellidos='';
             },
             formEditar:function(id, ci, nombres, apellidos){
               //capturamos los datos del registro seleccionado y los mostramos en el formulario
               this.paciente.id = id;
-              this.paciente.ci = ci;                            
+              this.paciente.ci = ci;
               this.paciente.nombres = nombres;
-              this.paciente.apellidos = apellidos;                      
-              this.dialog=true;                            
+              this.paciente.apellidos = apellidos;
+              this.dialog=true;
               this.operacion='editar';
             }
-       }      
+       }
     });
   </script>
 </body>
-</html> 
+</html>

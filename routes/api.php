@@ -27,11 +27,22 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 // Route::delete('/pacientes/{paciente}', [PacienteController::class,'destroy']);
 
 //Ruta con Resources
-Route::apiResource('pacientes', PacienteController::class);
+// Route::apiResource('pacientes', PacienteController::class);
 
 
 // Route::get('/articulos', function () {
 //     return view('index');
 // });
 
-// Route::get('/pacientes', 'App\Http\Controllers\API\PacienteController@index');
+
+//PARA UTILIZAR CON VISTA INDEX.HTML
+Route::get('/pacientes', 'App\Http\Controllers\API\PacienteController@index');//mostrar todos los registros
+Route::post('/pacientes','App\Http\Controllers\API\PacienteController@store');//crear un registro
+Route::put('/pacientes/{id}', 'App\Http\Controllers\API\PacienteController@update');//actualizar un registro
+Route::delete('/pacientes/{id}', 'App\Http\Controllers\API\PacienteController@destroy');//eliminar un registro
+
+
+
+
+
+

@@ -18,12 +18,7 @@ class PacienteController extends Controller
      */
     public function index()
     {
-        // return Paciente::all();
-
-        //con Resources para POSTMAN
-        // return PacienteResource::collection(Paciente::all());
-
-        //PARA CONSUMIR DESDE VISTA (INDEX.HTML)
+        //PARA MOSTRAR EN VISTA (INDEX.HTML)
         $pacientes = Paciente::all();
         return $pacientes;
     }
@@ -34,17 +29,15 @@ class PacienteController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(GuardarPacienteRequest $request)
+    public function store(Request $request)
     {
-        // Paciente::create($request->all());
-        // return response()->json([
-        //     'res' => true,
-        //     'mensaje' => 'Paciente Guardado Correctamente'
-        // ],200);
+        //PARA UTILIZAR DESDE VISTA (INDEX.HTML)
+        $paciente = new Paciente();
+        $paciente->ci = $request->ci;
+        $paciente->nombres = $request->nombres;
+        $paciente->apellidos = $request->apellidos;
 
-        //con Resources y mensajes
-        return (new PacienteResource(Paciente::create($request->all())))
-                    ->additional(['msg' => 'Paciente Guardado Correctamente']);
+        $paciente->save();
     }
 
     /**
@@ -55,14 +48,7 @@ class PacienteController extends Controller
      */
     public function show(Paciente $paciente)
     {
-        // return response()->json([
-        //     'res' => true,
-        //     'mensaje' => 'Paciente Actualizado Correctamente'
-        // ],200);
-
-        //con Resources y mensajes
-        return (new PacienteResource($paciente))
-                    ->additional(['msg' => 'Paciente Actualizado Correctamente']);
+        //
     }
 
     /**
@@ -72,24 +58,19 @@ class PacienteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ActualizarPacienteRequest $request, Paciente $paciente)
+    public function update(Request $request)
     {
-        // $paciente->update($request->all());
-        // return response()->json([
-        //     'res' => true,
-        //     'mensaje' => 'Paciente Actualizado Correctamente',
-        //     //muestra datos del paciente
-        //     'paciente' => $paciente
-        // ],200);
+        //PARA UTILIZAR DESDE VISTA (INDEX.HTML)
+        $paciente = Paciente::findOrFail($request->id);
+        $paciente->ci = $request->ci;
+        $paciente->nombres = $request->nombres;
+        $paciente->apellidos = $request->apellidos;
 
-         //con Resources y mensajes y StatusCode
-         $paciente->update($request->all());
-         return (new PacienteResource($paciente))
-                    ->additional(['msg' => 'Paciente Actualizado Correctamente'])
-                    ->response()
-                    ->setStatusCode(202);
+        $paciente->save();
+
+        return $paciente;
     }
-    
+
 
     /**
      * Remove the specified resource from storage.
@@ -97,17 +78,10 @@ class PacienteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Paciente $paciente)
+    public function destroy(Request $request)
     {
-        // $paciente->delete();
-        // return response()->json([
-        //     'res' => true,
-        //     'mensaje' => 'Paciente Eliminado Correctamente',
-        // ],200);
-
-        //con Resources
-        $paciente->delete();
-        return (new PacienteResource($paciente))
-                    ->additional(['msg' => 'Paciente Eliminado Correctamente']);
-    }    
+        //PARA UTILIZAR DESDE VISTA (INDEX.HTML)
+        $paciente = Paciente::destroy($request->id);
+        return $paciente;
+    }
 }
